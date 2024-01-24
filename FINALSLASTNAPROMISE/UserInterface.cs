@@ -6,11 +6,23 @@ namespace FINALSLASTNAPROMISE
 {
     internal class UserInterface
     {
+
         private List<TaskItem> tasks = new List<TaskItem>();
         private FileManager fileManager = new FileManager();
 
         public void Start()
         {
+            using (StreamReader sr = new StreamReader("TaskFiles.csv"))
+            {
+                string[] temp = new string[6];
+                string line = "";
+                while ((line = sr.ReadLine()) != null)
+                {
+                    temp = line.Split(',');
+                    TaskItem tk = new TaskItem(temp[0], temp[1], DateTime.Parse(temp[2]), DateTime.Parse(temp[3]), temp[4], temp[5]);
+                    tasks.Add(tk);
+                }
+            }
             tasks = fileManager.LoadTasks();
 
             bool exitProgram = false;
