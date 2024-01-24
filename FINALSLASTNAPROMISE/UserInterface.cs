@@ -71,6 +71,7 @@ namespace FINALSLASTNAPROMISE
 
                 TaskItem task = new TaskItem(taskName, taskDetails, DateTime.Now, deadline, comments, status);
                 tasks.Add(task);
+                fileManager.Writer(tasks);
 
                 Console.WriteLine("Task created successfully!");
             }

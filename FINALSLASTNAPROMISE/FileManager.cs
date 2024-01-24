@@ -7,7 +7,7 @@ namespace FINALSLASTNAPROMISE
 {
     internal class FileManager
     {
-        private const string TaskFilesDirectory = "TaskFiles";
+        private const string TaskFilesDirectory = "TaskFiles.csv";
 
         public void SaveTasks(List<TaskItem> tasks)
         {
@@ -127,7 +127,16 @@ namespace FINALSLASTNAPROMISE
 
             return null;
         }
-
+        public void Writer(List<TaskItem> Task)
+        {
+            using(StreamWriter sr = new StreamWriter(TaskFilesDirectory, true)) 
+            {
+                for (int x = 0; x < Task.Count; x++)
+                {
+                    sr.Write(Task[x]);
+                }
+            }
+        }
         private string GetFilePath(string status)
         {
             string fileName = $"{status.ToLower()}_tasks.csv";
